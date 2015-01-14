@@ -18,15 +18,27 @@ and other functions are defined on lib.h .
 # Ascii representation
 
    +-------+      +-----------+
+
    | cli.c |      | ncurces.c |
+
    +---+---+      +-----+-----+
+
        |                |
+
        +------+ +-------+
+
 	      | |
+
 	  +---+-+---+
+
 	  | core.c  |
+
 	  +----+----+
+
 	       |
+
  	   +---+---+
+
 	   | lib.c |
+
 	   +-------+
