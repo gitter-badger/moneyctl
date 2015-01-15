@@ -1,22 +1,24 @@
 OBJS := cli.o ncurses.o lib.o core.o
-NMONEYLIBS = $(shell pkg-config --libs ncurses)
+NMONEY_LIBS = $(shell pkg-config --libs ncurses)
+CFLAGS += -Wall
 
 build: moneycli nmoney
 install: install-nmoney install-moneycli
 all: build install
 
-moneycli: lib.o core.o cli.o
-	$(CC) $(LDFLAGS) $^ -o $@
-
-nmoney: lib.o core.o ncurses.o
-	$(CC) $(LDFLAGS) $^ -o $@ $(NMONEYLIBS)
+moneycli: cli.o core.o lib.o
+	$(CC) $(LDFLAGS) -o $@ $^
 	-chmod +x $@
 
-cli.o: src/cli.c src/lib.h src/core.h
-	$(CC) $(CFLAGS) -c $^
+nmoney: ncurses.o core.o lib.o
+	$(CC) $(LDFLAGS) -o $@ $^ $(NMONEY_LIBS)
+	-chmod +x $@
+
+cli.o: src/cli.c src/core.h src/lib.h
+	$(CC) $(CFLAGS) -c $<
 
 ncurses.o: src/ncurses.c src/core.h src/lib.h
-	$(CC) $(CFLAGS) -c $^
+	$(CC) $(CFLAGS) -c $<
 
 
 install-moneycli: moneycli
@@ -26,7 +28,7 @@ install-nmoney: nmoney
 	install -D $< $(DESTDIR)/usr/bin/
 
 %.o: src/%.c src/%.h
-	$(CC) $(CFLAGS) -c $^
+	$(CC) $(CFLAGS) -c $<
 
 .PHONY: clean
 clean:
