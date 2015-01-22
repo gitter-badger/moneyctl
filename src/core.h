@@ -3,11 +3,18 @@
 
 #define VERSION "0.0.1"
 
+#define TRANS_ADD 0
+#define TRANS_SUB 1
+
+typedef struct trons {
+	time_t time;
+	unsigned int type;
+	float count;
+} trons_t;
+
 int initCore();
 
-int addMoney(float count);
-
-int subMoney(float count);
+int transaction(unsigned char type, float count);
 
 int showStatics();
 

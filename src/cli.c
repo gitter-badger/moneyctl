@@ -47,9 +47,9 @@ int main(int argc, char *argv[]) {
 	debug("flags: add(%d, %.3f), remove(%d, %.3f), statics(%d)\n",
 			add, addCount, remove, removeCount, statics);
 	if(add)
-		addMoney(addCount);
+		transaction(TRANS_ADD, addCount);
 	if(remove)
-		subMoney(removeCount);
+		transaction(TRANS_SUB, removeCount);
 	if(statics)
 		showStatics();
 	exit(EXIT_SUCCESS);
