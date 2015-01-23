@@ -8,9 +8,10 @@ void debug(const char *fmt, ...) {
 	if(_debug) {
 		va_list args;
 		va_start(args, fmt);
+		fputs("[DEBUG] ", stderr);
 		vfprintf(stderr, fmt, args);
+		fputc('\n', stderr);
 		va_end(args);
 	}
 }
 #endif
-

@@ -9,7 +9,7 @@ unsigned int _debug;
 #define ARR_NEL(r1, r2)   (ARR_LEN(r1) - ARR_LEN(r2))
 
 #ifdef DEBUG
-#define debug(format, args...) fprintf (stderr, format, args)
+#define debug(format, args...) fprintf (stderr, "[DEBUG] " format "\n", args)
 #else
 void debug(const char *fmt, ...);
 #endif //DEBUG
